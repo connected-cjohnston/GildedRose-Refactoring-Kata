@@ -55,6 +55,22 @@ defmodule GildedRose do
     end
   end
 
+  def update_item(%Item{name: "Aged Brie"} = item) do
+    cond do
+      item.quality == 50 ->
+        %{item | sell_in: item.sell_in - 1}
+
+      item.sell_in > 0 ->
+        %{item | quality: item.quality + 1, sell_in: item.sell_in - 1}
+
+      item.sell_in <= 0 && item.quality == 49 ->
+        %{item | quality: 50, sell_in: item.sell_in - 1}
+
+      item.sell_in <= 0 ->
+        %{item | quality: item.quality + 2, sell_in: item.sell_in - 1}
+    end
+  end
+
   def update_item(item) do
     item =
       cond do
