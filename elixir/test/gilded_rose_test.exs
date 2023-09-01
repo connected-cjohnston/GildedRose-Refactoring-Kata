@@ -5,11 +5,6 @@ defmodule GildedRoseTest do
   use ExUnit.Case
   doctest GildedRose
 
-  # "Aged Brie"
-  # Backstage passes to a TAFKAL80ETC concert
-  # Sulfuras, Hand of Ragnaros
-  # Normal Item
-
   # NORMAL ITEM
   test "update quality with a single normal item before sell date" do
     item = %Item{name: "NORMAL ITEM", sell_in: 5, quality: 10}
