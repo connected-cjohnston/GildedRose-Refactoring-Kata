@@ -42,6 +42,19 @@ defmodule GildedRose do
     item
   end
 
+  def update_item(%Item{name: "NORMAL ITEM"} = item) do
+    cond do
+      item.quality == 0 ->
+        %{item | quality: 0, sell_in: item.sell_in - 1}
+
+      item.sell_in > 0 ->
+        %{item | quality: item.quality - 1, sell_in: item.sell_in - 1}
+
+      item.sell_in <= 0 ->
+        %{item | quality: item.quality - 2, sell_in: item.sell_in - 1}
+    end
+  end
+
   def update_item(item) do
     item =
       cond do
