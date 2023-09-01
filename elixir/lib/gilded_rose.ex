@@ -73,7 +73,7 @@ defmodule GildedRose do
 
   def update_item(%Item{name: "Backstage passes to a TAFKAL80ETC concert"} = item) do
     cond do
-      item.quality == 50 ->
+      item.sell_in > 0 && item.quality >= 49 ->
         %{item | quality: 50, sell_in: item.sell_in - 1}
 
       item.sell_in > 10 ->
@@ -82,14 +82,8 @@ defmodule GildedRose do
       item.sell_in > 5 && item.quality < 49 ->
         %{item | quality: item.quality + 2, sell_in: item.sell_in - 1}
 
-      item.sell_in > 5 && item.quality >= 49 ->
-        %{item | quality: 50, sell_in: item.sell_in - 1}
-
       item.sell_in > 0 && item.quality < 49 ->
         %{item | quality: item.quality + 3, sell_in: item.sell_in - 1}
-
-      item.sell_in > 0 && item.quality >= 49 ->
-        %{item | quality: 50, sell_in: item.sell_in - 1}
 
       item.sell_in <= 0 ->
         %{item | quality: 0, sell_in: item.sell_in - 1}
