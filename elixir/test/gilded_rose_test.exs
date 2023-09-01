@@ -263,4 +263,65 @@ defmodule GildedRoseTest do
     assert 0 == quality
     assert -11 == sell_in
   end
+
+  # Conjured Mana Cake
+  test "update quality with a single Conjured Mana Cake item before sell date" do
+    item = %Item{name: "Conjured Mana Cake", sell_in: 5, quality: 10}
+
+    [%Item{name: "Conjured Mana Cake", quality: quality, sell_in: sell_in}] =
+      GildedRose.update_quality([item])
+
+    assert 8 == quality
+    assert 4 == sell_in
+  end
+
+  test "update quality with a single Conjured Mana Cake item before sell date at zero quality" do
+    item = %Item{name: "Conjured Mana Cake", sell_in: 5, quality: 0}
+
+    [%Item{name: "Conjured Mana Cake", quality: quality, sell_in: sell_in}] =
+      GildedRose.update_quality([item])
+
+    assert 0 == quality
+    assert 4 == sell_in
+  end
+
+  test "update quality with a single Conjured Mana Cake item on sell date" do
+    item = %Item{name: "Conjured Mana Cake", sell_in: 0, quality: 10}
+
+    [%Item{name: "Conjured Mana Cake", quality: quality, sell_in: sell_in}] =
+      GildedRose.update_quality([item])
+
+    assert 6 == quality
+    assert -1 == sell_in
+  end
+
+  test "update quality with a single Conjured Mana Cake item on sell date at zero quality" do
+    item = %Item{name: "Conjured Mana Cake", sell_in: 0, quality: 0}
+
+    [%Item{name: "Conjured Mana Cake", quality: quality, sell_in: sell_in}] =
+      GildedRose.update_quality([item])
+
+    assert 0 == quality
+    assert -1 == sell_in
+  end
+
+  test "update quality with a single Conjured Mana Cake item after sell date" do
+    item = %Item{name: "Conjured Mana Cake", sell_in: -10, quality: 10}
+
+    [%Item{name: "Conjured Mana Cake", quality: quality, sell_in: sell_in}] =
+      GildedRose.update_quality([item])
+
+    assert 6 == quality
+    assert -11 == sell_in
+  end
+
+  test "update quality with a single Conjured Mana Cake item after sell date at zero quality" do
+    item = %Item{name: "Conjured Mana Cake", sell_in: -10, quality: 0}
+
+    [%Item{name: "Conjured Mana Cake", quality: quality, sell_in: sell_in}] =
+      GildedRose.update_quality([item])
+
+    assert 0 == quality
+    assert -11 == sell_in
+  end
 end
