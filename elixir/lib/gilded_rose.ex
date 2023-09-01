@@ -38,6 +38,10 @@ defmodule GildedRose do
     end
   end
 
+  def update_item(%Item{name: "Sulfuras, Hand of Ragnaros"} = item) do
+    item
+  end
+
   def update_item(item) do
     item =
       cond do
